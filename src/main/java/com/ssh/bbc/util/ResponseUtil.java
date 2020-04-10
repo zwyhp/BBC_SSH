@@ -72,6 +72,9 @@ public class ResponseUtil {
     public static Object unlogin() {
         return fail(501, "请登录");
     }
+    public static Object parameterError(String error) {
+        return fail(401, error);
+    }
     public static Object unsupport() {
         return fail(503, "业务不支持");
     }

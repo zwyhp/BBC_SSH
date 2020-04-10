@@ -2,22 +2,25 @@ package com.ssh.bbc.message.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssh.bbc.util.parameterverify.VerifyError;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Table(name = "tmessage")
 @Entity
 public class Tmessage {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MessageId")
     private int messageId;
     @Column(name = "GuestName")
     private String guestName;
 
     @NotEmpty(message = VerifyError.MESS_CONTENT_NOT_NULL)
+    @Size(min = 10 , message = VerifyError.MESS_CONTENT_SIZE)
     @Column(name = "MessageContent")
     private String messageContent;
 
@@ -37,6 +40,7 @@ public class Tmessage {
     private String messKind;
 
     @NotEmpty(message = VerifyError.MESS_TITLE_NOT_NULL)
+    @Size(min = 4 ,max = 15 , message = VerifyError.MESS_TITLE_SIZE)
     @Column(name = "MessageTitle")
     private String messageTitle;
 

@@ -1,20 +1,22 @@
 package com.ssh.bbc.messcategory.domain;
 
 import com.ssh.bbc.util.parameterverify.VerifyError;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Table(name = "TmessCategory")
 @Entity
 public class TmessCategory {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CategoryId")
     private int categoryId;
 
     @Column(name = "Category")
     @NotEmpty(message = VerifyError.CATEGORY_NOT_NULL)
+    @Size(min = 2 ,max = 4, message = VerifyError.CATEGORY_NAME_SIZE)
     private String category;
 
     @Column(name = "CategoryOwner")

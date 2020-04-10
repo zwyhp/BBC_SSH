@@ -1,6 +1,7 @@
 package com.ssh.bbc.user.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import com.ssh.bbc.util.parameterverify.VerifyError;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -9,31 +10,33 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "tuser")
 public class Tuser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "UserID")
     private int userId;
 
-    @Column(name = "UserName")
     @NotEmpty(message = VerifyError.USER_NAME_NOT_NULL)
+    @Size(min = 5 ,max = 20, message = VerifyError.USER_NAME_SIZE)
+    @Column(name = "UserName")
     private String userName;
 
-    @Column(name = "UserPwd")
     @NotEmpty(message = VerifyError.USER_PWD_NOT_NULL)
+    @Size(min = 6 , message = VerifyError.PWD_NAME_SIZE)
+    @Column(name = "UserPwd")
     private String userPwd;
 
-    @Column(name = "UserEmail")
     @NotEmpty(message = VerifyError.EMAIl_NOT_NULL)
+    @Column(name = "UserEmail")
     private String userEmail;
 
     @Column(name = "InBlack")
     private int inBlack;  //默认为0   1为加入黑名单
 
-    @Column(name = "Question")
     @NotEmpty(message = VerifyError.QUESTION_NOT_NULL)
+    @Column(name = "Question")
     private String question;
 
-    @Column(name = "Answer")
     @NotEmpty(message = VerifyError.ANSWER_NOT_NULL)
+    @Column(name = "Answer")
     private String answer;
 
     @Column(name = "IsOwner")

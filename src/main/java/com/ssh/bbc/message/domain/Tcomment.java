@@ -2,21 +2,24 @@ package com.ssh.bbc.message.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssh.bbc.util.parameterverify.VerifyError;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Table(name = "tcomment")
 @Entity
 public class Tcomment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CommentId")
     private int commentId;
 
     @Column(name = "CommentContent")
+    @Size(min = 5,message = VerifyError.COMMENT_SIZE)
     @NotEmpty(message = VerifyError.COMMENT_NOT_NULL)
     private String commentContent;
 

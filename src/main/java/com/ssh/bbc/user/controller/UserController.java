@@ -52,7 +52,7 @@ public class UserController {
      * @return
      */
     @PutMapping("/update")
-    public Object updatePwd(@RequestBody Tuser user){
+    public Object updatePwd(@RequestBody @Validated Tuser user){
         int i = 0;
         String answer = MD5hexUtil.getMd5hex(user.getUserName(),user.getAnswer());
         Tuser userByName = ituserService.queryTuserByName(user.getUserName());

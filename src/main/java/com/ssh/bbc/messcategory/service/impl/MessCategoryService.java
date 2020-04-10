@@ -39,8 +39,12 @@ public class MessCategoryService implements IMessCategoryService {
 
     @Override
     public int updateMessCategory(TmessCategory category) {
+        TmessCategory tmessCategory = tmesscategoryRepository.queryTMessCategoryById(category.getCategoryId());
         verifyCategory(category,1);
-        return tmesscategoryRepository.updateTMessCategoryById(category);
+        setCategoryOwner(category);
+        tmessCategory.setCategory(category.getCategory());
+        tmessCategory.setCategoryOwner(category.getCategoryOwner());
+        return tmesscategoryRepository.updateTMessCategoryById(tmessCategory);
     }
 
     @Override
@@ -75,13 +79,17 @@ public class MessCategoryService implements IMessCategoryService {
      */
     private void verifyCategory(TmessCategory category,int x){
         TmessCategory tmessCategory = tmesscategoryRepository.queryTMessCategoryByName(category.getCategory());
-        BussinessUtil.isnotNull(tmessCategory,BussinessUtil.CATEGORY_REPETITION);
         TmessCategory tMessCategoryByOwner = tmesscategoryRepository.queryTMessCategoryByOwner(category.getCategoryOwner());
         if (x == 0){
             BussinessUtil.isnotNull(tMessCategoryByOwner, BussinessUtil.OWNER_REPETITION);
+            BussinessUtil.isnotNull(tmessCategory, BussinessUtil.CATEGORY_REPETITION);
         }
-        if(x == 1 && category.getCategoryId() != tMessCategoryByOwner.getCategoryId()) {
-            BussinessUtil.isnotNull(tMessCategoryByOwner, BussinessUtil.OWNER_REPETITION);
+        if(x == 1 && tMessCategoryByOwner != null) {
+            if (category.getCategoryId() != tMessCategoryByOwner.getCategoryId())
+                BussinessUtil.isnotNull(tMessCategoryByOwner, BussinessUtil.OWNER_REPETITION);
+            if (category.getCategoryId() != tMessCategoryByOwner.getCategoryId()){
+                BussinessUtil.isnotNull(tmessCategory,BussinessUtil.CATEGORY_REPETITION);
+            }
         }
     }
 

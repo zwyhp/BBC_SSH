@@ -22,14 +22,5 @@
         <Root level="info">
             <AppenderRef ref="consolePrint" />
         </Root>
-        <Logger name="com.ssm.bbc.user.dao" level="DEBUG" additivity="false">
-            <AppenderRef ref="consolePrint" />
-        </Logger>
-        <Logger name="com.ssm.bbc.message.dao" level="DEBUG" additivity="false">
-            <AppenderRef ref="consolePrint" />
-        </Logger>
-        <Logger name="com.ssm.bbc.messcategory.dao" level="DEBUG" additivity="false">
-            <AppenderRef ref="consolePrint" />
-        </Logger>
     </Loggers>
 </Configuration>

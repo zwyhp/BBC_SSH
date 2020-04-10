@@ -1,7 +1,5 @@
 package com.ssh.bbc.controller;
 
-
-
 import com.ssh.bbc.util.BussinessException;
 import com.ssh.bbc.util.LoginException;
 import com.ssh.bbc.util.ResponseUtil;
@@ -16,10 +14,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-//@ControllerAdvice
+@ControllerAdvice
 public class GlobalExceptionHandler {
     private Logger log = LoggerFactory.getLogger(this.getClass());
-
     /**
      * 数据校验
      * @param exception
@@ -43,7 +40,7 @@ public class GlobalExceptionHandler {
         }else {
             msg = "系统繁忙，请稍后重试...";
         }
-       return ResponseUtil.badArgument(msg);
+       return ResponseUtil.parameterError(msg);
     }
 
 

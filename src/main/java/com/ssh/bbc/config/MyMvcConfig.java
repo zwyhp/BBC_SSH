@@ -29,7 +29,6 @@ import java.util.Properties;
 @EnableAspectJAutoProxy
 public class MyMvcConfig extends WebMvcConfigurerAdapter {
 
-
     /*静态资源拦截*/
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
